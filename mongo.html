@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="mongo">
+<head>
+    <title>Mongo</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css" />
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript">
+        angular.module("mongo", [])
+    </script>
+    <script type="text/javascript" src="controllers/mongoCtrl.js"></script>
+</head>
+<body ng-controller="mongoCtrl">
+    <div class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#">UNAGI</a>
+    </div>
+
+    <div class="alert alert-danger" ng-show="data.error">
+        Error ({{ error.status }}). There was a problem with data loading.
+        <a href="/mongo.html" class="alert-link">Click here to try again.</a>
+    </div>
+
+    <div class="panel panel-default row" ng-hide="data.error">
+        <div class="col-xs-3">
+            <a ng-click="selectCollection()" 
+                class="btn btn-block btn-default btn-lg" 
+                ng-class="getALLClass()">ALL({{ data.collections.length }})</a>
+            <a ng-repeat="collection in data.collections" 
+                ng-click="selectCollection(collection)"
+                class="btn btn-block btn-default btn-lg"
+                ng-class="getCollectionClass(collection)">{{ collection }}</a>
+        </div>
+        <div class="col-xs-8">
+            <div class="panel panel-default row">
+                <a ng-repeat="statistic in data.statistics"
+                    ng-click="selectCategory(statistic)"
+                    class="btn btn-default btn-lg"
+                    ng-class="getStatisticClass(statistic)">{{ statistic }}</a>
+            </div>
+            <hr>
+            <div ng-repeat="table in data.tables | filter: collectionFilterFn" 
+                class="panel panel-default row">
+                <h3><a ng-click="#/{{ table.name }}">{{ table.name }}</a></h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr><td ng-repeat="head in table.heads">{{ head }}</td></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in table.rows | filter: statisticFilterFn">
+                            <td ng-repeat="td in row">{{ td }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+</html>
