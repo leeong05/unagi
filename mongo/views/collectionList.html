@@ -1,5 +1,3 @@
-<div class="container-fluid">
-  <div class="row">
     <div ng-hide="data.error" ng-controller="collectionListCtrl">
       <div class="col-xs-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
@@ -15,7 +13,7 @@
 
       <div class="col-xs-9 col-xs-offset-3 col-md-10 col-md-offset-2">
         <div class="page-head">
-          <h3> Pick statistic:<h3>
+          <h3>Pick statistic:</h3>
           <div class="btn-group" role="group">
             <a ng-repeat="statistic in data.statistics"
                ng-click="selectStatistic(statistic)"
@@ -24,13 +22,15 @@
             </a>
           </div>
         </div>
+
         <hr>
+
         <div ng-repeat="table in data.tables | filter: collectionFilterFn" 
-             class="panel panel-default">
+             class="panel panel-info">
           <div class="panel-heading">
-            <h3>
-              <a href="/mongo/{{ table.name }}">{{ table.name }}</a>
-            </h3>
+            <h4 class="panel-title">
+              <a href="#/{{ table.name }}">{{ table.name }}</a>
+            </h4>
           </div>
           <table class="table table-striped">
             <thead>
@@ -45,5 +45,3 @@
         </div>
       </div>
     </div>
-  </div>
-</div>

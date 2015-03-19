@@ -1,30 +1,15 @@
 angular.module("mongo")
-.controller("mongoCtrl", function($scope) {
+.controller("mongoCtrl", ["$scope", "$http", 
+	function($scope, $http) {
 
-    $scope.data = {
-        collections: ['col1', 'col2'],
-        statistics: ['count', 'mean'],
-        tables: [
-            {
-                'name': 'col1',
-                'heads': ['data', 'statistic', '20150102', '20150101'],
-                'rows': [
-                    ['close', 'count', 4, 3],
-                    ['close', 'mean', 4, 3],
-                    ['open', 'count', 4, 3],
-                    ['open', 'mean', 4, 3],
-                ],
-            },
-            {
-                'name': 'col2',
-                'heads': ['data', 'statistic', '20150102', '20150101'],
-                'rows': [
-                    ['close', 'count', 4, 3],
-                    ['close', 'mean', 4, 3],
-                    ['open', 'count', 4, 3],
-                    ['open', 'mean', 4, 3],
-                ],
-            },
-        ],
-    };
-});
+		$scope.data = {};
+		
+  	$http.get("data/mongo_index.json")
+  		.success(function(data) {
+    		$scope.data = data;
+  		})
+  		.error(function(error) {
+    		$scope.data.error = error;
+  		});
+	}
+]);

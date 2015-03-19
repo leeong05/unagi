@@ -1,0 +1,36 @@
+		<div ng-controller="collectionDetailCtrl">
+			<div class="col-xs-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li>
+            <a ng-disable="true">{{ collection }}({{ data.names.length }})<span class="sr-only">(current)</span></a>
+          </li>
+          <li ng-repeat="name in data.names"
+              ng-class="getNameClass(name)">
+            <a ng-click="toggleNameSelect(name)">{{ name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-xs-9 col-xs-offset-3 col-md-10 col-md-offset-2">
+        <div class="page-head">
+          <h3>Pick statistic:<a class="btn btn-label" href="/mongo">Back to mongo</a></h3>
+          <div class="btn-group" role="group">
+            <a ng-repeat="statistic in data.statistics"
+               ng-click="selectStatistic(statistic)"
+               class="btn btn-default btn-label"
+               ng-class="getStatisticClass(statistic)">{{ statistic }}
+            </a>
+          </div>
+        </div>
+
+        <hr>
+        
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">{{ selectedStatistic }}</h4>
+          </div>
+        </div>
+        <div class="panel body graph" id="graph">
+          graph goes here
+        </div>
+		</div>
