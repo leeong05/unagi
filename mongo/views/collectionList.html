@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div ng-hide="data.error" ng-controller="collectionListCtrl">
+      <div class="col-xs-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li ng-class="getALLClass()">
+            <a ng-click="selectCollection()">ALL({{ data.collections.length }})<span class="sr-only">(current)</span></a>
+          </li>
+          <li ng-repeat="collection in data.collections" 
+              ng-class="getCollectionClass(collection)">
+            <a ng-click="selectCollection(collection)">{{ collection }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-xs-9 col-xs-offset-3 col-md-10 col-md-offset-2">
+        <div class="page-head">
+          <h3> Pick statistic:<h3>
+          <div class="btn-group" role="group">
+            <a ng-repeat="statistic in data.statistics"
+               ng-click="selectStatistic(statistic)"
+               class="btn btn-default btn-label"
+               ng-class="getStatisticClass(statistic)">{{ statistic }}
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div ng-repeat="table in data.tables | filter: collectionFilterFn" 
+             class="panel panel-default">
+          <div class="panel-heading">
+            <h3>
+              <a href="/mongo/{{ table.name }}">{{ table.name }}</a>
+            </h3>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr><td ng-repeat="head in table.heads">{{ head }}</td></tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="row in table.rows | filter: statisticFilterFn">
+                <td ng-repeat="td in row">{{ td }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 angular.module("mongo")
-.constant("dataUrl", "data.json")
-.controller("mongoCtrl", function($scope, $http, dataUrl) {
+.controller("mongoCtrl", function($scope) {
 
     $scope.data = {
         collections: ['col1', 'col2'],
