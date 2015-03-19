@@ -9,18 +9,32 @@
   <title>Mongo</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../static/css/dashboard.css" />
-  <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
+  <link rel="icon" href="../../favicon.ico" />
+  <style type="text/css">
+    .graph {
+      height: 400px;
+    }
+  </style>
+  <script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="../node_modules/angular-route/angular-route.min.js"></script>
   <script type="text/javascript">
     angular.module("mongo", ["ngRoute"])
-    .config(function ($routeProvider) {
-      $routeProvider.otherwise({
-        templateUrl: "/mongo/views/collectionList.html"
-      });
-    });
+    .config(["$routeProvider", 
+      function($routeProvider) {
+        $routeProvider
+          .when("/:collection", {
+            templateUrl: "/mongo/views/collectionDetail.html"
+          })
+          .otherwise({
+            templateUrl: "/mongo/views/collectionList.html"
+          });
+      }
+    ]);
   </script>
   <script type="text/javascript" src="controllers/mongoCtrl.js"></script>
   <script type="text/javascript" src="controllers/collectionListCtrl.js"></script>
-  <script src="../node_modules/angular/angular-route.js"></script>
+  <script type="text/javascript" src="controllers/collectionDetailCtrl.js"></script>
+  
 </head>
 
 <body ng-controller="mongoCtrl">
@@ -45,15 +59,21 @@
 
   <div class="container-fluid">
     <div class="row">
+
       <div class="alert alert-danger" ng-show="data.error">
         Error ({{ data.error.status }}). There was a problem with data loading.
         <a href="/mongo" class="alert-link">Click here to try again.</a>
       </div>
+
+      <div ng-view></div>
+
     </div>
+
+      <footer class="navbar-right">
+        <p>&copy; Foreseefund Investment Co., Ltd
+      </footer>
+
   </div>
-
-  <ng-view />
-
 </body>
 
 </html>
