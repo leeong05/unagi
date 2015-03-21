@@ -16,9 +16,11 @@
     }
   </style>
   <script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="../node_modules/moment/moment.js"></script>
   <script type="text/javascript" src="../node_modules/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript" src="../node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js"></script>
   <script type="text/javascript">
-    angular.module("mongo", ["ngRoute"])
+    angular.module("mongo", ["ngRoute", "ui.bootstrap"])
     .config(["$routeProvider", 
       function($routeProvider) {
         $routeProvider
@@ -70,7 +72,7 @@
     </div>
 
       <footer class="navbar-right">
-        <p>&copy; Foreseefund Investment Co., Ltd
+        <p>&copy; <a href="http://www.foreseefund.com">Foreseefund Investment Co., Ltd</a></p>
       </footer>
 
   </div>
