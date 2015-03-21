@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="mongo">
-
-<head>
+<head lang="en">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
@@ -9,36 +8,10 @@
   <title>Mongo</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../static/css/dashboard.css" />
+  <link rel="stylesheet" href="../node_modules/angular-chart.js/dist/angular-chart.css" />
+  <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css" />
   <link rel="icon" href="../../favicon.ico" />
-  <style type="text/css">
-    .graph {
-      height: 400px;
-    }
-  </style>
-  <script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
-  <script type="text/javascript" src="../node_modules/moment/moment.js"></script>
-  <script type="text/javascript" src="../node_modules/angular-route/angular-route.min.js"></script>
-  <script type="text/javascript" src="../node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js"></script>
-  <script type="text/javascript">
-    angular.module("mongo", ["ngRoute", "ui.bootstrap"])
-    .config(["$routeProvider", 
-      function($routeProvider) {
-        $routeProvider
-          .when("/:collection", {
-            templateUrl: "/mongo/views/collectionDetail.html"
-          })
-          .otherwise({
-            templateUrl: "/mongo/views/collectionList.html"
-          });
-      }
-    ]);
-  </script>
-  <script type="text/javascript" src="controllers/mongoCtrl.js"></script>
-  <script type="text/javascript" src="controllers/collectionListCtrl.js"></script>
-  <script type="text/javascript" src="controllers/collectionDetailCtrl.js"></script>
-  
 </head>
-
 <body ng-controller="mongoCtrl">
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fuild">
@@ -70,12 +43,34 @@
       <div ng-view></div>
 
     </div>
-
-      <footer class="navbar-right">
-        <p>&copy; <a href="http://www.foreseefund.com">Foreseefund Investment Co., Ltd</a></p>
-      </footer>
-
   </div>
-</body>
 
+  <footer class="navbar-right">
+    <p>&copy; <a href="http://www.foreseefund.com">Foreseefund Investment Co., Ltd</a></p>
+  </footer>
+
+  <script src="../node_modules/angular/angular.min.js"></script>
+  <script src="../node_modules/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript" src="../node_modules/moment/moment.js"></script>
+  <script src="../node_modules/chart.js/Chart.js"></script>
+  <script src="../node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js"></script>
+  <script src="../node_modules/angular-chart.js/angular-chart.js"></script>
+  <script>
+    angular.module("mongo", ["ngRoute", "chart.js", "ui.bootstrap"])
+    .config(["$routeProvider", 
+      function($routeProvider) {
+        $routeProvider
+          .when("/:collection", {
+            templateUrl: "/mongo/views/collectionDetail.html"
+          })
+          .otherwise({
+            templateUrl: "/mongo/views/collectionList.html"
+          });
+      }
+    ]);
+  </script>
+  <script type="text/javascript" src="controllers/mongoCtrl.js"></script>
+  <script type="text/javascript" src="controllers/collectionListCtrl.js"></script>
+  <script type="text/javascript" src="controllers/collectionDetailCtrl.js"></script>
+</body>
 </html>

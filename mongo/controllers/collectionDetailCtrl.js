@@ -60,5 +60,22 @@ angular.module("mongo")
 
   	$scope.end = moment().format("YYYY-MM-DD");
   	$scope.start = moment().add(-1, "years").format("YYYY-MM-DD");
-	}
+
+  	$scope.isCollapsed = true;
+
+		$scope.labels = ['January', 'February', 'March', "April", 'May', 'June', 'July'];
+  	$scope.series = ['Series A', 'Series B'];
+  	$scope.graphData = [
+    	[65, 59, 80, 81, 56, 55, 40],
+    	[28, 48, 40, 19, 86, 27, 90]
+  	];
+  	$scope.onClick = function (points, $event) {
+    	console.log(points, $event);
+  	};
+
+  	$scope.graphOptions = {
+  		animation: true,
+  		datasetFill: false,
+  	};
+ 	}
 ]);
